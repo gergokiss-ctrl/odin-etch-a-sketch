@@ -4,6 +4,13 @@ let counter = 1;
 
 createGrid(gridSize);
 
+const gridElements = document.querySelectorAll('div.column');
+console.log(gridElements);
+
+gridElements.forEach(column => column.addEventListener('pointerenter', function (e) {
+    e.target.style.background = 'orange';
+}))
+
 function createGrid(gridSize) {
     for (i = 1; i <= gridSize; i++) {
         let row = document.createElement('div');
