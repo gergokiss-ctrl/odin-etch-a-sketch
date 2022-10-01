@@ -1,7 +1,6 @@
 const container = document.querySelector('#container');
 const button = document.querySelector('#button');
 let gridSize = 16;
-let counter = 1;
 
 createGrid(gridSize);
 let gridElements = document.querySelectorAll('div.column');
@@ -15,8 +14,18 @@ button.addEventListener('click', () => {
 
     while (gridSize > 100) {
         alert('Please enter a number lower or equal to 100!');
-        gridSize = prompt("Enter a grid size", 16);
+        gridSize = prompt("Enter a grid size", 100);
     }
+
+    while (container.firstChild) {
+        container.firstChild.remove();
+    }
+
+    createGrid(gridSize);
+    gridElements = document.querySelectorAll('div.column');
+    gridElements.forEach(column => column.addEventListener('pointerenter', function (e) {
+        e.target.style.background = 'orange';
+    }))
 })
 
 function createGrid(gridSize) {
@@ -25,9 +34,8 @@ function createGrid(gridSize) {
         row.classList.add('row');
         container.appendChild(row);
 
-        for (j = 1; j <= gridSize; j++, counter++) {
+        for (j = 1; j <= gridSize; j++) {
             let column = document.createElement('div');
-            column.textContent = (`${counter}`);
             column.classList.add('column');
             row.appendChild(column);
         }
